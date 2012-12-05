@@ -1,1 +1,6 @@
 <%= link_to "Gradebook", root_path, :class => 'brand' %>
+<% if current_user %>
+  <p class="navbar-text pull-right"><%= link_to 'Logout', logout_path, :method => :delete %></p>
+<% else %>
+  <p class="navbar-text pull-right"><%= link_to 'Login', login_path %></p>
+<% end %>

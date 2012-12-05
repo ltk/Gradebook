@@ -30,6 +30,7 @@ GEM
       multi_json (~> 1.0)
     addressable (2.3.2)
     arel (3.0.2)
+    bcrypt-ruby (3.0.1)
     bootstrap-sass (2.2.1.1)
       sass (~> 3.2)
     builder (3.0.4)
@@ -157,6 +158,8 @@ GEM
     simple_form (2.0.4)
       actionpack (~> 3.0)
       activemodel (~> 3.0)
+    simplest_auth (0.3.1)
+      bcrypt-ruby (>= 2.1.1)
     slop (3.3.3)
     sprockets (2.2.2)
       hike (~> 1.2)
@@ -196,5 +199,6 @@ DEPENDENCIES
   rspec-rails (>= 2.11.4)
   sass-rails (~> 3.2.3)
   simple_form (>= 2.0.4)
+  simplest_auth
   sqlite3
   uglifier (>= 1.0.3)
