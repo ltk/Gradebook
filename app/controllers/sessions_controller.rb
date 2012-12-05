@@ -6,10 +6,10 @@ class SessionsController < ApplicationController
     if user = User.authenticate(params[:user][:email], params[:user][:password])
       self.current_user = user
       flash[:notice] = 'Welcome!'
-      redirect_to root_path
+      redirect_to current_user.is_admin? ? admin_dashboard_path : dashboard_path
     else
-      flash.now[:error] =  "Sorry, we couldn't locate a user with those credentials."
-      render :action => :new
+      flash[:error] =  "Sorry, we couldn't locate a user with those credentials."
+      redirect_to login_path
     end
   end
 

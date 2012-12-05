@@ -10,4 +10,12 @@ class User < ActiveRecord::Base
 
   validates_presence_of :password, :on => :create
   validates_confirmation_of :password, :if => :password_required?
+
+  def admin=(bool)
+    self.add_role :admin if bool
+  end
+
+  def is_admin?
+    self.has_role? :admin
+  end
 end
