@@ -1,4 +1,5 @@
 class User < ActiveRecord::Base
+  rolify
   include SimplestAuth::Model
       
   authenticate_by :email

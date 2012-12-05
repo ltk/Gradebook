@@ -1,9 +1,8 @@
-<h1>Listing users</h1>
+<h1>All Users</h1>
 
 <table>
   <tr>
     <th>Email</th>
-    <th>Crypted password</th>
     <th>First name</th>
     <th>Last name</th>
     <th></th>
@@ -14,7 +13,6 @@
 <% @users.each do |user| %>
   <tr>
     <td><%= user.email %></td>
-    <td><%= user.crypted_password %></td>
     <td><%= user.first_name %></td>
     <td><%= user.last_name %></td>
     <td><%= link_to 'Show', user %></td>
