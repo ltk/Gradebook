@@ -1,0 +1,21 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <b>Name:</b>
+  <%= @course.name %>
+</p>
+
+<p>
+  <b>Code:</b>
+  <%= @course.code %>
+</p>
+
+<p>
+  <b>Description:</b>
+  <%= @course.description %>
+</p>
+
+<% if can? :manage, Course %>
+<%= link_to 'Edit', edit_course_path(@course) %> |
+<% end %>
+<%= link_to 'Back', courses_path %>

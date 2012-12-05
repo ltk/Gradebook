@@ -9,7 +9,7 @@
 <ul class="nav">
   <li class="active"><a href="#">Home</a></li>
   <% if current_user.is_admin? %><li><%= link_to 'Users', users_path %></li><% end %>
-  <li><a href="#contact">Courses</a></li>
+  <li><%= link_to 'Courses', courses_path %></li>
   <li><a href="#contact">Students</a></li>
   <li><a href="#contact">Teachers</a></li>
   <% if current_user.is_admin? %>

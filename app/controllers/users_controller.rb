@@ -41,7 +41,10 @@ class UsersController < ApplicationController
   # POST /users
   # POST /users.json
   def create
+    type = params[:user][:type]
+    params[:user].tap { |hs| hs.delete(:type) }
     @user = User.new(params[:user])
+    @user.update_attribute(:type, type)
 
     respond_to do |format|
       if @user.save
