@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  authorize_resource
+  authorize_resource  
   # GET /users
   # GET /users.json
   def index

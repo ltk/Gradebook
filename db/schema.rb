@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121205160630) do
+ActiveRecord::Schema.define(:version => 20121205184915) do
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -29,8 +29,9 @@ ActiveRecord::Schema.define(:version => 20121205160630) do
     t.string   "crypted_password"
     t.string   "first_name"
     t.string   "last_name"
-    t.datetime "created_at",       :null => false
-    t.datetime "updated_at",       :null => false
+    t.datetime "created_at",                              :null => false
+    t.datetime "updated_at",                              :null => false
+    t.string   "type",             :default => "Student"
   end
 
   create_table "users_roles", :id => false, :force => true do |t|
