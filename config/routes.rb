@@ -1,4 +1,7 @@
 Gradebook::Application.routes.draw do
+  resources :semesters
+
+
   resources :teaching_assignments
 
 

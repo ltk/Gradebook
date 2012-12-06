@@ -1,11 +1,10 @@
 class User < ActiveRecord::Base
   include SimplestAuth::Model
-
   has_many :enrollments
-  has_many :courses, :through => :enrollments
+  has_many :enrolled_courses, :through => :enrollments, :source => :course
 
   has_many :teaching_assignments, :foreign_key => :teacher_id
-  has_many :courses, :through => :teaching_assignments
+  has_many :taught_courses, :through => :teaching_assignments, :source => :course
 
   authenticate_by :email
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name
@@ -20,6 +19,10 @@ class User < ActiveRecord::Base
   
   def self.to_s
     "User"
+  end
+
+  def gpa
+    self.enrollments.inject { |sum,enrollment| enrollment.grade }
   end
 
   def is_admin?

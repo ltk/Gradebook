@@ -1,0 +1,22 @@
+<h1><%= @semester.name %></h1>
+
+<p>
+  <b>Courses count:</b>
+  <%= pluralize(@semester.courses_count, "Course") %>
+</p>
+
+<p>
+  <b>Start date:</b>
+  <%= @semester.start_date %>
+</p>
+
+<p>
+  <b>End date:</b>
+  <%= @semester.end_date %>
+</p>
+
+
+
+
+<%= link_to 'Edit', edit_semester_path(@semester) %> |
+<%= link_to 'Back', semesters_path %>

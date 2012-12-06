@@ -1,11 +1,10 @@
-<%= simple_form_for(@course) do |f| %>
+<%= simple_form_for(@semester) do |f| %>
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.association :semester %>
     <%= f.input :name %>
-    <%= f.input :code %>
-    <%= f.input :description %>
+    <%= f.input :start_date %>
+    <%= f.input :end_date %>
   </div>
 
   <div class="form-actions">

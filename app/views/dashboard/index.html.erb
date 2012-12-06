@@ -1,1 +1,8 @@
 <h1>Dashboard</h1>
+<h2>Your Courses</h2>
+<h4>Overall GPA: <%= @gpa %></h4>
+<ul>
+<% @enrollments.each do |enrollment| %>
+  <li><%= enrollment.course.name %> | <%= enrollment.grade %></li>
+<% end %>
+</ul>

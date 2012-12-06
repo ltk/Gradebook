@@ -1,4 +1,5 @@
-<h3><%= @course.code %></h3>
+<%= link_to "<< Back to Courses", courses_path %>
+<h3><%= @course.code %> | <%= @course.semester.name %></h3>
 <h1><%= @course.name %></h1>
 <p><%= @course.description %></p>
 
@@ -9,6 +10,7 @@
 <% if can? :manage, Course %>
   <hr/>
   <h2>Course Instructors</h2>
+  <h4><%= pluralize(@course.teaching_assignments.size, "Instructor") %></h4>
   <%= simple_form_for(@course) do |f| %>
     <%= f.error_notification %>
 
@@ -29,6 +31,7 @@
 
   <hr/>
   <h2>Enrolled Students</h2>
+  <h4><%= pluralize(@course.enrollments.size, "Student") %></h4>
   <%= simple_form_for(@course) do |f| %>
     <%= f.error_notification %>
 
