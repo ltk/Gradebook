@@ -9,4 +9,14 @@ class Course < ActiveRecord::Base
 
   accepts_nested_attributes_for :enrollments, :allow_destroy => true
   accepts_nested_attributes_for :teaching_assignments, :allow_destroy => true
+
+  scope :for_semester, lambda { |semester| semester.nil? ? nil : where(:semester_id => semester.id) }
+
+  def enrollment
+    self.enrollments.first
+  end
+
+  def for_semester(semester)
+    self.semester_id == semester.id
+  end
 end

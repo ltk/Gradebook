@@ -1,9 +1,9 @@
 class User < ActiveRecord::Base
   include SimplestAuth::Model
-  has_many :enrollments
+  has_many :enrollments, :dependent => :destroy
   has_many :enrolled_courses, :through => :enrollments, :source => :course
 
-  has_many :teaching_assignments, :foreign_key => :teacher_id
+  has_many :teaching_assignments, :foreign_key => :teacher_id, :dependent => :destroy
   has_many :taught_courses, :through => :teaching_assignments, :source => :course
 
   authenticate_by :email
@@ -21,9 +21,12 @@ class User < ActiveRecord::Base
     "User"
   end
 
-  def gpa
-    self.enrollments.inject { |sum,enrollment| enrollment.grade }
+  def gpa(semester = nil)
+    self.enrolled_courses.for_semester(semester).average('grade')
   end
+  # def gpa
+  #   self.enrollments.inject { |sum,enrollment| enrollment.grade }
+  # end
 
   def is_admin?
     false
@@ -36,6 +39,8 @@ class User < ActiveRecord::Base
   def to_s
     self.full_name
   end
+
+  
 
   def self.child_classes
     ['Administrator', 'Student', 'Teacher']

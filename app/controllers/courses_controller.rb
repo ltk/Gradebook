@@ -1,9 +1,10 @@
 class CoursesController < ApplicationController
   authorize_resource
+  before_filter :set_semester
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.all
+    @courses = Course.for_semester(@semester).all
 
     respond_to do |format|
       format.html # index.html.erb
@@ -45,7 +46,7 @@ class CoursesController < ApplicationController
 
     respond_to do |format|
       if @course.save
-        format.html { redirect_to @course, notice: 'Course was successfully created.' }
+        format.html { redirect_to @semester ? semester_course_path(@semester, @course) : @course, notice: 'Course was successfully created.' }
         format.json { render json: @course, status: :created, location: @course }
       else
         format.html { render action: "new" }
@@ -80,5 +81,11 @@ class CoursesController < ApplicationController
       format.html { redirect_to courses_url }
       format.json { head :no_content }
     end
+  end
+
+  private
+
+  def set_semester
+    @semester = Semester.find(params[:semester_id]) if params[:semester_id]
   end
 end

@@ -14,7 +14,7 @@
 <% @semesters.each do |semester| %>
   <tr>
     <td><%= semester.name %></td>
-    <td><%= pluralize(semester.courses_count, '') %></td>
+    <td><%= pluralize(semester.courses_count, '') %> <%= link_to "(View #{pluralize( semester.courses_count, "Course")})", semester_courses_path(semester) if semester.courses_count %></td>
     <td><%= semester.start_date %></td>
     <td><%= semester.end_date %></td>
     <td><%= link_to 'Show', semester %></td>

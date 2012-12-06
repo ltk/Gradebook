@@ -1,0 +1,13 @@
+<% courses.each do |semester, courses| %>
+  <% if show_semester_info %>
+  <h3><%= semester.name %></h3>
+    <% if defined? gpas %>
+      <h4>Semester GPA: <%= gpas[semester] %></h4>
+    <% end %>
+  <% end %>
+  <ul>
+  <% courses.each do |course| %>
+    <%= render 'course', :course => course, :semester => semester %>
+  <% end %>
+  </ul> 
+<% end %>

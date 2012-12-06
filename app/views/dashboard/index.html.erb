@@ -1,8 +1,18 @@
 <h1>Dashboard</h1>
-<h2>Your Courses</h2>
-<h4>Overall GPA: <%= @gpa %></h4>
-<ul>
-<% @enrollments.each do |enrollment| %>
-  <li><%= enrollment.course.name %> | <%= enrollment.grade %></li>
-<% end %>
-</ul>
+<h4>Overall GPA: <%= @gpas[:overall].round(2) %></h4>
+<hr/>
+
+<h2>Current Courses: <%= @semester.name %></h2>
+<h4>Semester GPA: <%= @gpas[@semester] %></h4>
+
+<%= render 'courses', :courses => @courses[:current], :show_semester_info => false %>
+
+<hr/>
+
+<h2>Future Courses</h2>
+<%= render 'courses', :courses => @courses[:future], :show_semester_info => true %>
+
+<hr/>
+
+<h2>Past Courses</h2>
+<%= render 'courses', :courses => @courses[:past], :show_semester_info => true, :gpas => @gpas %>

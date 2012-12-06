@@ -1,5 +1,5 @@
 <%= link_to "<< Back to Dashboard", dashboard_path %>
-<h1>Listing courses</h1>
+<h1>Listing <%= @semester ? @semester.name : "All" %> Courses</h1>
 
 <table>
   <tr>
@@ -18,10 +18,10 @@
     <td><%= course.name %></td>
     <td><%= course.code %></td>
     <td><%= course.description %></td>
-    <td><%= link_to 'Show', course %></td>
+    <td><%= link_to 'Show', @semester ? semester_course_path(@semester, course) : course %></td>
     <% if can? :manage, Course %>
-    <td><%= link_to 'Edit', edit_course_path(course) %></td>
-    <td><%= link_to 'Destroy', course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+    <td><%= link_to 'Edit', @semester ? edit_semester_course_path(@semester, course) : edit_course_path(course) %></td>
+    <td><%= link_to 'Destroy', @semster ? semester_course_path(@semester, course) : course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
   </tr>
 <% end %>
@@ -29,5 +29,5 @@
 
 <br />
 <% if can? :manage, Course %>
-<%= link_to 'New Course', new_course_path %>
+<%= link_to 'New Course', @semester ? new_semester_course_path(@semester) : new_course_path %>
 <% end %>

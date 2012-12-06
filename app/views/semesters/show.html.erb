@@ -2,7 +2,7 @@
 
 <p>
   <b>Courses count:</b>
-  <%= pluralize(@semester.courses_count, "Course") %>
+  <%= pluralize(@semester.courses_count, "Course") %> <%= link_to "(View Courses)", semester_courses_path(@semester) if @semester.courses_count %>
 </p>
 
 <p>

@@ -1,0 +1,1 @@
+<li><%= link_to course.name, semester_course_path(semester,course) %> | <%= course.enrollment.grade ? gpa_to_grade(course.enrollment.grade) : "No Grade" %></li>
