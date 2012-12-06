@@ -3,9 +3,8 @@
 <hr/>
 
 <h2>Current Courses: <%= @semester.name %></h2>
-<h4>Semester GPA: <%= @gpas[@semester] %></h4>
 
-<%= render 'courses', :courses => @courses[:current], :show_semester_info => false %>
+<%= render 'courses', :courses => @courses[:current], :show_semester_info => true, :gpas => @gpas %>
 
 <hr/>
 

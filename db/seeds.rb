@@ -68,12 +68,13 @@ student_data = [
   { first_name: 'Cadel', last_name: 'Evans', type: 'Student', email: 'cadel@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Andy', last_name: 'Schleck', type: 'Student', email: 'andy@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Alberto', last_name: 'Contador', type: 'Student', email: 'alberto@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
+  { first_name: 'Lance', last_name: 'Armstrong', type: 'Student', email: 'lance@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Carlos', last_name: 'Sastre', type: 'Student', email: 'carlos@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Oscar', last_name: 'Pereiro', type: 'Student', email: 'oscar@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Marco', last_name: 'Pantani', type: 'Student', email: 'marco@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Jan', last_name: 'Ullrich', type: 'Student', email: 'jan@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' },
   { first_name: 'Bjarne', last_name: 'Riis', type: 'Student', email: 'bjarne@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' }
-  { first_name: 'Miguel', last_name: 'Indurain', type: 'Student', email: 'miguel@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' }
+  
 ]
 admin_data = [
   { first_name: 'Lawson', last_name: 'Kurtz', type: 'Administrator', email: 'lawson@gradebook.edu', password: 'correct horse battery staple', password_confirmation: 'correct horse battery staple' }
@@ -95,41 +96,36 @@ iterate_users(student_data, students)
 iterate_users(admin_data, admins)
 iterate_users(teacher_data, teachers)
 
-
-teaching_assignment_data = [
-  { course_id: courses[0].id, teacher_id: teachers[0].id }
-]
-
 enrollment_data = [
   { course_id: courses[0].id, user_id: students[0].id, grade: 4.00 },
   { course_id: courses[0].id, user_id: students[1].id, grade: 3.30 },
-  { course_id: courses[0].id, user_id: students[2].id, grade: 3.00 },
-  { course_id: courses[0].id, user_id: students[3].id, grade: 3.30 },
-  { course_id: courses[0].id, user_id: students[4].id, grade: 3.00 },
+  { course_id: courses[0].id, user_id: students[2].id, grade: 3.70 },
+  { course_id: courses[0].id, user_id: students[3].id, grade: 2.00 },
+  { course_id: courses[0].id, user_id: students[4].id, grade: 1.00 },
 
   { course_id: courses[1].id, user_id: students[0].id, grade: 4.00 },
-  { course_id: courses[1].id, user_id: students[1].id, grade: 3.30 },
-  { course_id: courses[1].id, user_id: students[2].id, grade: 3.00 },
-  { course_id: courses[1].id, user_id: students[3].id, grade: 3.30 },
-  { course_id: courses[1].id, user_id: students[4].id, grade: 3.00 },
+  { course_id: courses[1].id, user_id: students[1].id, grade: 3.00 },
+  { course_id: courses[1].id, user_id: students[2].id, grade: 3.70 },
+  { course_id: courses[1].id, user_id: students[3].id, grade: 2.70 },
+  { course_id: courses[1].id, user_id: students[4].id, grade: 0.00 },
 
   { course_id: courses[2].id, user_id: students[0].id, grade: 4.00 },
-  { course_id: courses[2].id, user_id: students[1].id, grade: 3.30 },
+  { course_id: courses[2].id, user_id: students[1].id, grade: 4.00 },
   { course_id: courses[2].id, user_id: students[2].id, grade: 3.00 },
   { course_id: courses[2].id, user_id: students[3].id, grade: 3.30 },
-  { course_id: courses[2].id, user_id: students[4].id, grade: 3.00 },
+  { course_id: courses[2].id, user_id: students[4].id, grade: 0.00 },
 
-  { course_id: courses[3].id, user_id: students[0].id, grade: 4.00 },
+  { course_id: courses[3].id, user_id: students[0].id, grade: 3.70 },
   { course_id: courses[3].id, user_id: students[1].id, grade: 3.30 },
   { course_id: courses[3].id, user_id: students[2].id, grade: 3.00 },
   { course_id: courses[3].id, user_id: students[3].id, grade: 3.30 },
-  { course_id: courses[3].id, user_id: students[4].id, grade: 3.00 },
+  { course_id: courses[3].id, user_id: students[4].id, grade: 0.70 },
 
-  { course_id: courses[4].id, user_id: students[0].id, grade: 4.00 },
+  { course_id: courses[4].id, user_id: students[0].id, grade: 4.30 },
   { course_id: courses[4].id, user_id: students[1].id, grade: 3.30 },
   { course_id: courses[4].id, user_id: students[2].id, grade: 3.00 },
   { course_id: courses[4].id, user_id: students[3].id, grade: 3.30 },
-  { course_id: courses[4].id, user_id: students[4].id, grade: 3.00 },
+  { course_id: courses[4].id, user_id: students[4].id, grade: 1.00 },
 
   { course_id: courses[5].id, user_id: students[0].id },
   { course_id: courses[5].id, user_id: students[1].id },
@@ -191,7 +187,24 @@ enrollment_data = [
   { course_id: courses[14].id, user_id: students[3].id },
   { course_id: courses[14].id, user_id: students[4].id }
 
+]
 
+teaching_assignment_data = [
+  { course_id: courses[0].id, teacher_id: teachers[2].id },
+  { course_id: courses[1].id, teacher_id: teachers[0].id },
+  { course_id: courses[2].id, teacher_id: teachers[3].id },
+  { course_id: courses[3].id, teacher_id: teachers[4].id },
+  { course_id: courses[4].id, teacher_id: teachers[1].id },
+  { course_id: courses[5].id, teacher_id: teachers[2].id },
+  { course_id: courses[6].id, teacher_id: teachers[0].id },
+  { course_id: courses[7].id, teacher_id: teachers[3].id },
+  { course_id: courses[8].id, teacher_id: teachers[4].id },
+  { course_id: courses[9].id, teacher_id: teachers[1].id },
+  { course_id: courses[10].id, teacher_id: teachers[2].id },
+  { course_id: courses[11].id, teacher_id: teachers[0].id },
+  { course_id: courses[12].id, teacher_id: teachers[3].id },
+  { course_id: courses[13].id, teacher_id: teachers[4].id },
+  { course_id: courses[14].id, teacher_id: teachers[1].id }
 ]
 
 enrollments = []

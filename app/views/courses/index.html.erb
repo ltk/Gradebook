@@ -5,6 +5,8 @@
   <tr>
     <th>Name</th>
     <th>Code</th>
+    <th>Semester</th>
+    <th>Enrolled Students</th>
     <th>Description</th>
     <th></th>
     <% if can? :manage, Course %>
@@ -17,6 +19,8 @@
   <tr>
     <td><%= course.name %></td>
     <td><%= course.code %></td>
+    <td><%= course.semester.name %></td>
+    <td><%= course.enrollments_count %></td>
     <td><%= course.description %></td>
     <td><%= link_to 'Show', @semester ? semester_course_path(@semester, course) : course %></td>
     <% if can? :manage, Course %>
