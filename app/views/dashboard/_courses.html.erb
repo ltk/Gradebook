@@ -2,7 +2,9 @@
   <% if show_semester_info %>
   <h3><%= semester.name %></h3>
     <% if defined? gpas %>
-      <h4>Semester GPA: <%= gpas[semester] %></h4>
+      <% if gpas[semester] %>
+        <h4>Semester GPA: <%= gpas[semester].round(2) %></h4>
+      <% end %>
     <% end %>
   <% end %>
   <ul>
