@@ -1,9 +1,14 @@
 Gradebook::Application.routes.draw do
-  resources :courses
+  resources :teaching_assignments
 
 
   resources :users
   resources :sessions, :only => [:new, :create]
+
+  resources :courses do
+    resources :enrollments
+    resources :teaching_assignments
+  end
 
   match "logout", :via => :delete, :to => "sessions#destroy", :as => "logout"
   match "login", :via => :get, :to => "sessions#new", :as => "login"

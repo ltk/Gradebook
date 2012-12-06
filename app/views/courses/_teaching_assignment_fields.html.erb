@@ -1,0 +1,6 @@
+<fieldset>
+  <h5>Adding New Instructor <small>(<%= link_to "Cancel", '#', class: "remove_fields" %>)</small></h5>
+  <%= f.association :user, :label => 'Instructor' %>
+  <%= f.input :_destroy, :as => :hidden %>
+</fieldset>
+<hr/>

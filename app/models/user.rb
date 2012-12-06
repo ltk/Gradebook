@@ -1,6 +1,12 @@
 class User < ActiveRecord::Base
   include SimplestAuth::Model
 
+  has_many :enrollments
+  has_many :courses, :through => :enrollments
+
+  has_many :teaching_assignments, :foreign_key => :teacher_id
+  has_many :courses, :through => :teaching_assignments
+
   authenticate_by :email
   attr_accessible :email, :password, :password_confirmation, :first_name, :last_name
 
@@ -19,7 +25,14 @@ class User < ActiveRecord::Base
   def is_admin?
     false
   end
+
+  def full_name
+    "#{self.first_name if self.first_name} #{self.last_name if self.last_name}"
+  end
   
+  def to_s
+    self.full_name
+  end
 
   def self.child_classes
     ['Administrator', 'Student', 'Teacher']

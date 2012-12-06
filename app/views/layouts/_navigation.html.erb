@@ -7,19 +7,10 @@
 
 <% if current_user %>
 <ul class="nav">
-  <li class="active"><a href="#">Home</a></li>
-  <% if current_user.is_admin? %><li><%= link_to 'Users', users_path %></li><% end %>
-  <li><%= link_to 'Courses', courses_path %></li>
-  <li><a href="#contact">Students</a></li>
-  <li><a href="#contact">Teachers</a></li>
+  <li class="<%= 'active' if params[:controller] == 'dashboard' || params[:controller] == 'admin_dashboard' %>"><%= link_to "Dashboard", dashboard_path %></li>
   <% if current_user.is_admin? %>
-    <li class="dropdown">
-      <a href="#" class="dropdown-toggle" data-toggle="dropdown">Teachers <b class="caret"></b></a>
-      <ul class="dropdown-menu">
-        <li><%= link_to 'View All', users_path %></li>
-        <li><%= link_to 'Add New', new_user_path %></li>
-      </ul>
-    </li>
+  <li class="<%= 'active' if params[:controller] == 'users' %>"><%= link_to 'Users', users_path %></li>
   <% end %>
+  <li class="<%= 'active' if params[:controller] == 'courses' %>"><%= link_to 'Courses', courses_path %></li>
 </ul>
 <% end %>
