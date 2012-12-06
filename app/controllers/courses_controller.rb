@@ -17,6 +17,10 @@ class CoursesController < ApplicationController
   def show
     @course = Course.includes(:teachers, :students).find(params[:id])
 
+    current_user_enrollment = @course.enrollments.where(:user_id => current_user.id).first
+
+    @grade = current_user_enrollment.grade if current_user_enrollment
+
     respond_to do |format|
       format.html # show.html.erb
       format.json { render json: @course }

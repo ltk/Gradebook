@@ -1,7 +1,10 @@
 <%= link_to "<< Back to Courses", @semester ? semester_courses_path(@semester) : courses_path %>
 <h3><%= @course.code %> | <%= @course.semester.name %></h3>
 <h1><%= @course.name %></h1>
-<p><%= @course.description %></p>
+<p class="lead"><%= @course.description %></p>
+<% if @grade %>
+  <h4>Your grade: <%= @grade %></h4>
+<% end %>
 
 <% if can? :manage, Course %>
   <%= link_to '(Edit Course Information)', @semester ? edit_semester_course_path(@semester, @course) : edit_course_path(@course) %>

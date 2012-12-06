@@ -1,15 +1,17 @@
 <% courses.each do |semester, courses| %>
-  <% if show_semester_info %>
-  <h3><%= semester.name %></h3>
-    <% if defined? gpas %>
-      <% if gpas[semester] %>
-        <h4>Semester GPA: <%= gpas[semester].round(2) %></h4>
+  <div class="well">
+    <% if show_semester_info %>
+    <h3><%= semester.name %></h3>
+      <% if defined? gpas %>
+        <% if gpas[semester] %>
+          <h4>Semester GPA: <%= gpas[semester].round(2) %></h4>
+        <% end %>
       <% end %>
     <% end %>
-  <% end %>
-  <ul>
-  <% courses.each do |course| %>
-    <%= render 'course', :course => course, :semester => semester %>
-  <% end %>
-  </ul> 
+    <ul>
+    <% courses.each do |course| %>
+      <%= render 'course', :course => course, :semester => semester %>
+    <% end %>
+    </ul> 
+  </div>
 <% end %>

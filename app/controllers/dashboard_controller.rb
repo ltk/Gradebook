@@ -8,7 +8,7 @@ class DashboardController < ApplicationController
     @courses  = { :current => {}, :future => {}, :past => {} }
     @gpas = {}
 
-    current_user.enrolled_courses.includes(:semester, :enrollments).order().collect do |course|
+    current_user.enrolled_courses.includes(:semester, :enrollments).collect do |course|
       @semesters << course.semester
       if( course.for_semester(@semester) )
         if @courses[:current][@semester]
