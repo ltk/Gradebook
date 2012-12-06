@@ -2,7 +2,7 @@
   <div class="well">
     <% if show_semester_info %>
     <h3><%= semester.name %></h3>
-      <% if defined? gpas %>
+      <% if defined? gpas and ! gpas.nil? %>
         <% if gpas[semester] %>
           <h4>Semester GPA: <%= gpas[semester].round(2) %></h4>
         <% end %>
@@ -10,7 +10,12 @@
     <% end %>
     <ul>
     <% courses.each do |course| %>
-      <%= render 'course', :course => course, :semester => semester %>
+      <% if defined? gpas and ! gpas.nil? %>
+        <%= render 'course_with_grade', :course => course, :semester => semester %>
+      <% else %>
+        <%= render 'course', :course => course, :semester => semester %>
+      <% end %>
+      
     <% end %>
     </ul> 
   </div>

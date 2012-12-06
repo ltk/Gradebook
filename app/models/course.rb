@@ -17,6 +17,11 @@ class Course < ActiveRecord::Base
   end
 
   def for_semester(semester)
+    return false unless semester.is_a? Semester
     self.semester_id == semester.id
+  end
+
+  def sorted_with_grades
+
   end
 end
