@@ -11,10 +11,10 @@ class DashboardController < ApplicationController
     current_user.enrolled_courses.includes(:semester, :enrollments).order().collect do |course|
       @semesters << course.semester
       if( course.for_semester(@semester) )
-        if @courses[:current][course.semester]
-          @courses[:current][course.semester] << course
+        if @courses[:current][@semester]
+          @courses[:current][@semester] << course
         else
-          @courses[:current][course.semester] = [course]
+          @courses[:current][@semester] = [course]
         end
       elsif( course.semester.start_date < @semester.start_date )
         if @courses[:past][course.semester]
@@ -32,7 +32,7 @@ class DashboardController < ApplicationController
     end
 
     @semesters.each do |semester|
-      @gpas[semester] = current_user.gpa(semester)
+      @gpas[semester] = current_user.gpa(semester) unless @courses[:future].has_key? semester
     end
     
     @gpas[:overall] = current_user.gpa
