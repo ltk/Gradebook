@@ -4,7 +4,7 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.for_semester(@semester).includes(:semester).all
+    @courses = Course.for_semester(@semester).includes(:semester, :teaching_assignments).all
 
     respond_to do |format|
       format.html # index.html.erb

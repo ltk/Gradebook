@@ -23,8 +23,12 @@
     <td><%= course.enrollments_count %></td>
     <td><%= course.description %></td>
     <td><%= link_to 'Show', @semester ? semester_course_path(@semester, course) : course %></td>
-    <% if can? :manage, Course %>
+    
+    <% if can? :edit, course %>
     <td><%= link_to 'Edit', @semester ? edit_semester_course_path(@semester, course) : edit_course_path(course) %></td>
+    <% end %>
+
+    <% if can? :manage, course %>
     <td><%= link_to 'Destroy', @semster ? semester_course_path(@semester, course) : course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
     <% end %>
   </tr>

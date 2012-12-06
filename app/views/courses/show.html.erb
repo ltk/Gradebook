@@ -6,11 +6,8 @@
   <h4>Your grade: <%= @grade %></h4>
 <% end %>
 
-<% if can? :manage, Course %>
+<% if can? :manage, @course %>
   <%= link_to '(Edit Course Information)', @semester ? edit_semester_course_path(@semester, @course) : edit_course_path(@course) %>
-<% end %>
-
-<% if can? :manage, Course %>
   <hr/>
   <h2>Course Instructors</h2>
   <h4><%= pluralize(@course.teaching_assignments.size, "Instructor") %></h4>

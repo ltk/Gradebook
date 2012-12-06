@@ -1,21 +1,19 @@
-<h1>Dashboard</h1>
-
 <% if @data[:gpas] && @data[:gpas][:overall] %>
   <h4>Overall GPA: <%= @data[:gpas][:overall].round(2) %></h4>
 <% end %>
 
 <hr/>
 
-<h2>Current Courses: <%= @current_semester.name %></h2>
+<h2>Your Current Courses: <%= @current_semester.name %></h2>
 
 <%= render 'courses', :courses => @data[:courses][:current], :show_semester_info => true, :gpas => @data[:gpas] %>
 
 <hr/>
 
-<h2>Future Courses</h2>
+<h2>Your Future Courses</h2>
 <%= render 'courses', :courses => @data[:courses][:future], :show_semester_info => true %>
 
 <hr/>
 
-<h2>Past Courses</h2>
+<h2>Your Past Courses</h2>
 <%= render 'courses', :courses => @data[:courses][:past], :show_semester_info => true, :gpas => @data[:gpas] %>
