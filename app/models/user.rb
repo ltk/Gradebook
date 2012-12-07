@@ -17,6 +17,10 @@ class User < ActiveRecord::Base
 
   validates :type, :inclusion => { :in => ['Administrator', 'Student', 'Teacher'], :message => "%{value} is not a valid user type" }
   
+  scope :by, lambda { |attribute| order( attribute + ' ASC') }
+
+  self.per_page = 20
+
   def self.to_s
     "User"
   end
@@ -39,8 +43,6 @@ class User < ActiveRecord::Base
   def to_s
     self.full_name
   end
-
-  
 
   def self.child_classes
     ['Administrator', 'Student', 'Teacher']

@@ -1,18 +1,16 @@
 <%= link_to "<< Back to Dashboard", dashboard_path %>
 <h1>Listing <%= @semester ? @semester.name : "All" %> Courses</h1>
-
-<table>
+<%= will_paginate @courses %>
+<table class="table">
   <tr>
     <th>Name</th>
     <th>Code</th>
     <th>Semester</th>
     <th>Enrolled Students</th>
-    <th>Description</th>
-    <th></th>
-    <% if can? :manage, Course %>
+    <th>Average Gradepoint</th>
     <th></th>
     <th></th>
-    <% end %>
+    <th></th>
   </tr>
 
 <% @courses.each do |course| %>
@@ -21,19 +19,28 @@
     <td><%= course.code %></td>
     <td><%= course.semester.name %></td>
     <td><%= course.enrollments_count %></td>
-    <td><%= course.description %></td>
-    <td><%= link_to 'Show', @semester ? semester_course_path(@semester, course) : course %></td>
+    <td>
+      <% if can? :manage, course %>
+        <%= render 'gpa', :gpa => course.average_gradepoint %>
+      <% end %>
+    </td>
+    <td><%= link_to 'View', @semester ? semester_course_path(@semester, course) : course %></td>
     
-    <% if can? :edit, course %>
-    <td><%= link_to 'Edit', @semester ? edit_semester_course_path(@semester, course) : edit_course_path(course) %></td>
-    <% end %>
+    <td>
+      <% if can? :edit, course %>
+        <%= link_to 'Edit', @semester ? edit_semester_course_path(@semester, course) : edit_course_path(course) %>
+      <% end %>
+    </td>
 
-    <% if can? :manage, course %>
-    <td><%= link_to 'Destroy', @semster ? semester_course_path(@semester, course) : course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
-    <% end %>
+    <td>
+      <% if can? :manage, course %>
+        <%= link_to 'Delete', @semster ? semester_course_path(@semester, course) : course, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      <% end %>
+    </td>
   </tr>
 <% end %>
 </table>
+<%= will_paginate @courses %>
 
 <br />
 <% if can? :manage, Course %>

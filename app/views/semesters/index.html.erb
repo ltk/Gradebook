@@ -1,6 +1,6 @@
-<h1>Listing semesters</h1>
-
-<table>
+<h1>Listing Semesters</h1>
+<%= will_paginate @semesters %>
+<table class="table">
   <tr>
     <th>Name</th>
     <th>Courses</th>
@@ -23,6 +23,7 @@
   </tr>
 <% end %>
 </table>
+<%= will_paginate @semesters %>
 
 <br />
 

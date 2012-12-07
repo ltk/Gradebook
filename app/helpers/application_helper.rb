@@ -19,4 +19,34 @@ module ApplicationHelper
     end
     link_to(name, '#', class: "add_fields button", data: {id: id, fields: fields.gsub("\n", "")})
   end
+
+  def gpa_to_label_class(gpa)
+    case gpa
+      when 0..0.7
+        'inverse'
+      when 0.7..1.3
+        'important'
+      when 1.7..2.7
+        'warning'
+      when 2.7..3.7
+        'info'
+      else
+        'success'
+    end
+  end
+
+  def grade_to_label_class(grade)
+    case grade
+      when "A+", "A", "A-"
+        'success'
+      when "B+", "B", "B-"
+        'info'
+      when "C+", "C", "C-"
+        'warning'
+      when "D+", "D", "D-"
+        'important'
+      else
+        'inverse'
+    end
+  end
 end

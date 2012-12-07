@@ -31,19 +31,19 @@ semesters = Semester.create(semester_data)
 course_data = [
   { name: 'Intro Biology', code: 'Bio 101', description: 'Introductory Biology', semester: semesters[0] },
   { name: 'Intro Comp Sci', code: 'CompSci 101', description: 'Introductory Computer Science', semester: semesters[0] },
-  { name: 'Intro Chem', code: 'Chem 101', description: 'Introductory Chemistry', semester: semesters[0] },
+  { name: 'Intro Pharmacology', code: 'Pharm 101', description: 'Introductory Pharmacology', semester: semesters[0] },
   { name: 'Intro Philosophy', code: 'Phil 101', description: 'Introductory Philosophy', semester: semesters[0] },
   { name: 'Intro French', code: 'French 101', description: 'Introductory French', semester: semesters[0] },
 
   { name: 'Intermediate Biology', code: 'Bio 103', description: 'Intermediate Biology', semester: semesters[1] },
   { name: 'Intermediate Comp Sci', code: 'CompSci 103', description: 'Intermediate Computer Science', semester: semesters[1] },
-  { name: 'Intermediate Chem', code: 'Chem 103', description: 'Intermediate Chemistry', semester: semesters[1] },
+  { name: 'Intermediate Pharmacology', code: 'Pharm 103', description: 'Intermediate Pharmacology', semester: semesters[1] },
   { name: 'Intermediate Philosophy', code: 'Phil 103', description: 'Intermediate Philosophy', semester: semesters[1] },
   { name: 'Intermediate French', code: 'French 103', description: 'Intermediate French', semester: semesters[1] },
 
   { name: 'Advanced Biology', code: 'Bio 190', description: 'Advanced Biology', semester: semesters[2] },
   { name: 'Advanced Comp Sci', code: 'CompSci 190', description: 'Advanced Computer Science', semester: semesters[2] },
-  { name: 'Advanced Chem', code: 'Chem 190', description: 'Advanced Chemistry', semester: semesters[2] },
+  { name: 'Advanced Pharmacology', code: 'Pharm 190', description: 'Advanced Pharmacology', semester: semesters[2] },
   { name: 'Advanced Philosophy', code: 'Phil 190', description: 'Advanced Philosophy', semester: semesters[2] },
   { name: 'Advanced French', code: 'French 190', description: 'Advanced French', semester: semesters[2] },
 
@@ -103,9 +103,9 @@ enrollment_data = [
   { course_id: courses[0].id, user_id: students[3].id, grade: 2.00 },
   { course_id: courses[0].id, user_id: students[4].id, grade: 1.00 },
 
-  { course_id: courses[1].id, user_id: students[0].id, grade: 4.00 },
-  { course_id: courses[1].id, user_id: students[1].id, grade: 3.00 },
-  { course_id: courses[1].id, user_id: students[2].id, grade: 3.70 },
+  { course_id: courses[1].id, user_id: students[0].id, grade: 2.70 },
+  { course_id: courses[1].id, user_id: students[1].id, grade: 2.00 },
+  { course_id: courses[1].id, user_id: students[2].id, grade: 1.70 },
   { course_id: courses[1].id, user_id: students[3].id, grade: 2.70 },
   { course_id: courses[1].id, user_id: students[4].id, grade: 0.00 },
 
@@ -113,7 +113,7 @@ enrollment_data = [
   { course_id: courses[2].id, user_id: students[1].id, grade: 4.00 },
   { course_id: courses[2].id, user_id: students[2].id, grade: 3.00 },
   { course_id: courses[2].id, user_id: students[3].id, grade: 3.30 },
-  { course_id: courses[2].id, user_id: students[4].id, grade: 0.00 },
+  { course_id: courses[2].id, user_id: students[4].id, grade: 4.00 },
 
   { course_id: courses[3].id, user_id: students[0].id, grade: 3.70 },
   { course_id: courses[3].id, user_id: students[1].id, grade: 3.30 },

@@ -12,6 +12,8 @@ class Course < ActiveRecord::Base
 
   scope :for_semester, lambda { |semester| semester.nil? ? nil : where(:semester_id => semester.id) }
 
+  self.per_page = 20
+
   def enrollment
     self.enrollments.first
   end
@@ -21,7 +23,7 @@ class Course < ActiveRecord::Base
     self.semester_id == semester.id
   end
 
-  def sorted_with_grades
-
+  def average_gradepoint
+    self.enrollments.average('grade')
   end
 end

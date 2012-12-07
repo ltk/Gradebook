@@ -7,8 +7,11 @@ class Ability
             can :manage, :all
         elsif user.is_a?(Teacher)
             can :read, Course
-            can :edit, Course, :teaching_assignments => { :teacher_id => user.id }
-            can :manage, User, :user_id => user.id
+            can :manage, Course, :teaching_assignments => { :teacher_id => user.id }
+            can :read, User
+            can :update, User do |u|
+                u.id == user.id
+            end
         elsif user.is_a?(Student)
             can :read, Course
         end

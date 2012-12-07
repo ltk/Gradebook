@@ -1,8 +1,9 @@
 class SemestersController < ApplicationController
+  load_and_authorize_resource
   # GET /semesters
   # GET /semesters.json
   def index
-    @semesters = Semester.all
+    @semesters = @semesters.page(params[:page]).order('start_date ASC')
 
     respond_to do |format|
       format.html # index.html.erb

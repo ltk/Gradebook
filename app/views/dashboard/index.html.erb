@@ -1,8 +1,6 @@
 <% if @data[:gpas] && @data[:gpas][:overall] %>
-  <h4>Overall GPA: <%= @data[:gpas][:overall].round(2) %></h4>
+  <h4>Overall GPA: <%= render 'gpa', :gpa => @data[:gpas][:overall].round(2) %></h4>
 <% end %>
-
-<hr/>
 
 <h2>Your Current Courses: <%= @current_semester.name %></h2>
 
@@ -11,7 +9,7 @@
 <hr/>
 
 <h2>Your Future Courses</h2>
-<%= render 'courses', :courses => @data[:courses][:future], :show_semester_info => true %>
+<%= render 'courses', :courses => @data[:courses][:future], :show_semester_info => true, :gpas => @data[:gpas] %>
 
 <hr/>
 

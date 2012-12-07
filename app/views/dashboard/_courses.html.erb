@@ -4,7 +4,7 @@
     <h3><%= semester.name %></h3>
       <% if defined? gpas and ! gpas.nil? %>
         <% if gpas[semester] %>
-          <h4>Semester GPA: <%= gpas[semester].round(2) %></h4>
+          <h4>Semester GPA: <%= render 'gpa', :gpa => gpas[semester].round(2) %></h4>
         <% end %>
       <% end %>
     <% end %>

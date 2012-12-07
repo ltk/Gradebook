@@ -1,2 +1,7 @@
 <h1>Login</h1>
 <%= render 'form' %>
+
+<h3>For Your Convenience:</h3>
+<%= link_to 'Fill with Admin Credentials', '#', :class => 'fill_credentials btn', :data => { :email => 'lawson@gradebook.edu', :password => 'correct horse battery staple' } %>
+<%= link_to 'Fill with Teacher Credentials', '#', :class => 'fill_credentials btn', :data => { :email => 'marie@gradebook.edu', :password => 'correct horse battery staple' } %>
+<%= link_to 'Fill with Student Credentials', '#', :class => 'fill_credentials btn', :data => { :email => 'cadel@gradebook.edu', :password => 'correct horse battery staple' } %>
