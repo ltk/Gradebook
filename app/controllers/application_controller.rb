@@ -11,4 +11,10 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user)
   end
 
+  private
+
+  def set_current_semester
+    @current_semester = Semester.current.find(:first)
+  end
+
 end

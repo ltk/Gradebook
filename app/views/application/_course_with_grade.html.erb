@@ -1,0 +1,3 @@
+<li><%= link_to course.name, course_path(course) %> | <strong><%= course.enrollments.where(:user_id => current_user.id).first.grade ? ( render 'grade', :grade => Grade.new(course.enrollments.where(:user_id => current_user.id).first.grade)) : "No Grade" %></strong></li>
+
+#fix enrollment loading

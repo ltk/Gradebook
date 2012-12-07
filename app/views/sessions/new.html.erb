@@ -2,6 +2,6 @@
 <%= render 'form' %>
 
 <h3>For Your Convenience:</h3>
-<%= link_to 'Fill with Admin Credentials', '#', :class => 'fill_credentials btn', :data => { :email => 'lawson@gradebook.edu', :password => 'correct horse battery staple' } %>
-<%= link_to 'Fill with Teacher Credentials', '#', :class => 'fill_credentials btn', :data => { :email => 'marie@gradebook.edu', :password => 'correct horse battery staple' } %>
-<%= link_to 'Fill with Student Credentials', '#', :class => 'fill_credentials btn', :data => { :email => 'cadel@gradebook.edu', :password => 'correct horse battery staple' } %>
+<%= render 'fill_in_button', :name => 'Admin', :email => 'lawson@gradebook.edu' %>
+<%= render 'fill_in_button', :name => 'Teacher', :email => 'marie@gradebook.edu' %>
+<%= render 'fill_in_button', :name => 'Student', :email => 'cadel@gradebook.edu' %>

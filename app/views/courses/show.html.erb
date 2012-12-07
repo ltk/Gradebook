@@ -1,53 +1,15 @@
 <%= link_to "<< Back to Courses", @semester ? semester_courses_path(@semester) : courses_path %>
-<h3><%= @course.code %> | <%= @course.semester.name %></h3>
-<h1><%= @course.name %></h1>
-<p class="lead"><%= @course.description %></p>
-<% if @grade %>
-  <h4>Your grade: <%= @grade %></h4>
+
+<%= render 'course_info', :course => @course %>
+
+<% if @grade.present? %>
+  <h4>Your Grade: <%= render 'grade', :grade => @grade %></h4>
+<% end %>
+
+<% if @average_grade.present? %>
+  <h4>Average Grade: <%= render 'grade', :grade => @average_grade %></h4>
 <% end %>
 
 <% if can? :manage, @course %>
-  <%= link_to '(Edit Course Information)', @semester ? edit_semester_course_path(@semester, @course) : edit_course_path(@course) %>
-  <hr/>
-  <h2>Course Instructors</h2>
-  <h4><%= pluralize(@course.teaching_assignments.size, "Instructor") %></h4>
-  <%= simple_form_for(@course) do |f| %>
-    <%= f.error_notification %>
-
-    <%= f.simple_fields_for :teaching_assignments do |e| %>
-      <fieldset>
-        <h5><%= e.object.user.full_name %> <small>(<%= link_to "Remove from Course", '#', class: "remove_fields" %>)</small></h5>
-        <%= e.input :_destroy, :as => :hidden %>
-      </fieldset>
-      <hr/>
-    <% end %>
-
-    <%= link_to_add_fields "Add an Instructor to this Course", f, :teaching_assignments %>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Save Changes" %>
-    </div>
-  <% end %>
-
-  <hr/>
-  <h2>Enrolled Students</h2>
-  <h4><%= pluralize(@course.enrollments.size, "Student") %></h4>
-  <%= simple_form_for(@course) do |f| %>
-    <%= f.error_notification %>
-
-    <%= f.simple_fields_for :enrollments do |e| %>
-      <fieldset>
-        <h5><%= e.object.user.full_name %> <small>(<%= link_to "Remove from Course", '#', class: "remove_fields" %>)</small></h5>
-        <%= grade_selector(e) %>
-        <%= e.input :_destroy, :as => :hidden %>
-      </fieldset>
-      <hr/>
-    <% end %>
-
-    <%= link_to_add_fields "Add a Student to this Course", f, :enrollments %>
-
-    <div class="form-actions">
-      <%= f.button :submit, "Save Changes" %>
-    </div>
-  <% end %>
+  <%= render 'course_management', :course => @course, :semester => @semester %>
 <% end %>

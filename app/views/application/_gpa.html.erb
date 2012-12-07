@@ -1,3 +1,3 @@
-<% if gpa %>
-<span class="badge badge-<%= gpa_to_label_class(gpa) %>"><%= gpa %></span>
+<% if defined? grade and grade.is_a? Grade and grade.present? %>
+<span class="badge badge-<%= grade.to_label %>"><%= grade.to_gradepoint %></span>
 <% end %>

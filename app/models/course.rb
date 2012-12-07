@@ -10,6 +10,13 @@ class Course < ActiveRecord::Base
   accepts_nested_attributes_for :enrollments, :allow_destroy => true
   accepts_nested_attributes_for :teaching_assignments, :allow_destroy => true
 
+  validates_associated :enrollments
+  validates_associated :teaching_assignments
+  validates_presence_of :semester
+  validates_presence_of :name
+  validates_presence_of :code
+  validates_presence_of :description
+
   scope :for_semester, lambda { |semester| semester.nil? ? nil : where(:semester_id => semester.id) }
 
   self.per_page = 20

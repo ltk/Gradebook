@@ -1,0 +1,5 @@
+<%= link_to '(Edit Course Information)', semester ? edit_semester_course_path(semester, course) : edit_course_path(course) %>
+<hr/>
+<%= render 'course_instructors', :course => course %>
+<hr/>
+<%= render 'course_students', :course => course %>

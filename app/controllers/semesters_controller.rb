@@ -3,7 +3,7 @@ class SemestersController < ApplicationController
   # GET /semesters
   # GET /semesters.json
   def index
-    @semesters = @semesters.page(params[:page]).order('start_date ASC')
+    @semesters = @semesters.page(params[:page]).order('start_date DESC')
 
     respond_to do |format|
       format.html # index.html.erb

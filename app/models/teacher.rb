@@ -1,7 +1,5 @@
 class Teacher < User
-  def to_s
-    super + " (teacher)"
-  end
+  scope :not_in, lambda { |course| order('last_name ASC').where('id not in (?)', course.teachers.map { |s| s.id } ) }
 
   def course_history(current_semester)
     data = { :semesters => [], :courses => { :current => {}, :future => {}, :past => {} } }

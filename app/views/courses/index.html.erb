@@ -1,4 +1,4 @@
-<%= link_to "<< Back to Dashboard", dashboard_path %>
+<%= @semester ? (link_to "<< Back to Semesters", semesters_path) : (link_to "<< Back to Dashboard", dashboard_path) %>
 <h1>Listing <%= @semester ? @semester.name : "All" %> Courses</h1>
 <%= will_paginate @courses %>
 <table class="table">
@@ -7,7 +7,9 @@
     <th>Code</th>
     <th>Semester</th>
     <th>Enrolled Students</th>
-    <th>Average Gradepoint</th>
+    <% if current_user.is_a? Teacher or can? :manage, Course %>
+    <th>Average Grade</th>
+    <% end %>
     <th></th>
     <th></th>
     <th></th>
@@ -19,11 +21,15 @@
     <td><%= course.code %></td>
     <td><%= course.semester.name %></td>
     <td><%= course.enrollments_count %></td>
+    
+    <% if current_user.is_a? Teacher or can? :manage, Course %>
     <td>
       <% if can? :manage, course %>
-        <%= render 'gpa', :gpa => course.average_gradepoint %>
+        <%= render 'grade', :grade => Grade.new(course.average_gradepoint) %>
       <% end %>
     </td>
+    <% end %>
+
     <td><%= link_to 'View', @semester ? semester_course_path(@semester, course) : course %></td>
     
     <td>

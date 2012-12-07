@@ -4,7 +4,12 @@ class CoursesController < ApplicationController
   # GET /courses
   # GET /courses.json
   def index
-    @courses = Course.for_semester(@semester).includes(:semester, :teaching_assignments).page(params[:page]).order('name ASC')
+    if current_user.is_a? Teacher
+      @courses = Course.for_semester(@semester).includes(:semester, :teaching_assignments).page(params[:page]).order('name ASC')
+    else
+      @courses = Course.for_semester(@semester).includes(:semester).page(params[:page]).order('name ASC')
+    end
+    
 
     respond_to do |format|
       format.html # index.html.erb
@@ -16,10 +21,9 @@ class CoursesController < ApplicationController
   # GET /courses/1.json
   def show
     @course = Course.includes(:teachers, :students).find(params[:id])
-
     current_user_enrollment = @course.enrollments.where(:user_id => current_user.id).first
-
-    @grade = current_user_enrollment.grade if current_user_enrollment
+    @grade = Grade.new(current_user_enrollment.grade) if current_user_enrollment
+    @average_grade = Grade.new(@course.average_gradepoint) if can? :manage, @course
 
     respond_to do |format|
       format.html # show.html.erb

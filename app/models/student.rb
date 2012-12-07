@@ -1,8 +1,12 @@
 class Student < User
+  scope :not_in, lambda { |course| order('last_name ASC').where('id not in (?)', course.students.map { |s| s.id } ) }
+
   def course_history(current_semester)
     data = { :semesters => [], :courses => { :current => {}, :future => {}, :past => {} }, :gpas => {} }
 
-    self.enrolled_courses.includes(:semester, :enrollments).collect do |course|
+    # student_with_enrollments = User.includes(:enrollments => { :course => :semester}).find(self.id)
+
+    self.enrolled_courses.includes(:semester).collect do |course|
       data[:semesters] << course.semester
       if( course.for_semester(current_semester) )
         if data[:courses][:current][current_semester]

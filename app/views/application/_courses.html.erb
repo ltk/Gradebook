@@ -1,0 +1,22 @@
+<% courses.each do |semester, courses| %>
+  <div class="well">
+    <% if show_semester_info %>
+    <h3><%= semester.name %></h3>
+      <% if defined? gpas and ! gpas.nil? %>
+        <% if gpas[semester] %>
+          <h4>Semester GPA: <%= render 'gpa', :grade => Grade.new(gpas[semester]) %></h4>
+        <% end %>
+      <% end %>
+    <% end %>
+    <ul>
+    <% courses.each do |course| %>
+      <% if defined? gpas and ! gpas.nil? %>
+        <%= render 'course_with_grade', :course => course, :semester => semester %>
+      <% else %>
+        <%= render 'course', :course => course, :semester => semester %>
+      <% end %>
+      
+    <% end %>
+    </ul> 
+  </div>
+<% end %>
