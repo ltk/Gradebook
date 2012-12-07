@@ -1,7 +1,5 @@
-<fieldset>
-  <h5>Adding New Student <small>(<%= link_to "Cancel", '#', class: "remove_fields" %>)</small></h5>
-  <%= f.association :user, :label => 'Student', :collection => Student.not_in( @course ) %>
-  <%= grade_selector(f) %>
-  <%= f.input :_destroy, :as => :hidden %>
-</fieldset>
-<hr/>
+<tr>
+  <td><%= f.association :user, :label => false, :collection => Student.not_in( @course ) %></td>
+  <td><%= grade_selector(f, false) %></td>
+  <td><%= f.input :_destroy, :as => :hidden %><%= link_to "Cancel", '#', class: "remove_fields" %></td>
+</tr>

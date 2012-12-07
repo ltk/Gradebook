@@ -1,5 +1,5 @@
 module CoursesHelper
-  def grade_selector(form_builder)
-    form_builder.input :grade, :collection => grades_hash
+  def grade_selector(form_builder, label = 'Grade')
+    form_builder.input :grade, :collection => grades_hash, :label => label
   end
 end

@@ -2,21 +2,25 @@
 <h4><%= pluralize(course.teaching_assignments.size, "Instructor") %></h4>
 <%= simple_form_for(course) do |f| %>
   <%= f.error_notification %>
-
+  <table class="table">
+    <tr>
+      <th>Instructor</th>
+      <th></th>
+    </tr>
   <%= f.simple_fields_for :teaching_assignments do |e| %>
     <% if e.object.user.nil? %>
       <%= render 'teaching_assignment_fields', :f => e %>
     <% else %>
-      <fieldset>
-        <h5><%= e.object.user.nil? ? 'New Teacher' : e.object.user.full_name %> <small>(<%= link_to "Remove from Course", '#', class: "remove_fields" %>)</small></h5>
-        <%= e.input :_destroy, :as => :hidden %>
-      </fieldset>
+      <tr>
+        <td><%= e.object.user.nil? ? 'New Teacher' : e.object.user.full_name %></td>
+        <td><%= link_to "Remove from Course", '#', class: "remove_fields" %><%= e.input :_destroy, :as => :hidden %></td>
+      </tr>
     <% end %>
     <hr/>
   <% end %>
 
-  <%= link_to_add_fields "Add an Instructor to this Course", f, :teaching_assignments %>
-
+      <tr><td colspan='2'><%= link_to_add_fields "Add an Instructor to this Course", f, :teaching_assignments %></td></tr>
+    </table>
   <div class="form-actions">
     <%= f.button :submit, "Save Changes" %>
   </div>

@@ -2,22 +2,26 @@
 <h4><%= pluralize(course.enrollments.size, "Student") %></h4>
 <%= simple_form_for(course) do |f| %>
   <%= f.error_notification %>
-
+  <table class="table">
+    <tr>
+      <th>Student</th>
+      <th>Grade</th>
+      <th></th>
+    </tr>
   <%= f.simple_fields_for :enrollments do |e| %>
+    
     <% if e.object.user.nil? %>
       <%= render 'enrollment_fields', :f => e %>
     <% else %>
-      <fieldset>
-        <h5><%= e.object.user.nil? ? 'Student' : e.object.user.full_name %> <small>(<%= link_to "Remove from Course", '#', class: "remove_fields" %>)</small></h5>
-        <%= grade_selector(e) %>
-        <%= e.input :_destroy, :as => :hidden %>
-      </fieldset>
+      <tr>
+        <td><%= e.object.user.nil? ? 'Student' : e.object.user.full_name %></td>
+        <td><%= grade_selector(e, false) %></td>
+        <td><%= link_to "Remove from Course", '#', class: "remove_fields" %><%= e.input :_destroy, :as => :hidden %></td>
+      </tr>
     <% end %>
-    <hr/>
   <% end %>
-
-  <%= link_to_add_fields "Add a Student to this Course", f, :enrollments %>
-
+      <tr><td colspan='3'><%= link_to_add_fields "Add a Student to this Course", f, :enrollments %></td></tr>
+  </table>
   <div class="form-actions">
     <%= f.button :submit, "Save Changes" %>
   </div>

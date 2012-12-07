@@ -4,13 +4,14 @@
 
 jQuery ->
   $('form').on 'click', '.remove_fields', (event) ->
-    fieldset = $(this).closest('fieldset')
-    fieldset.find('input.hidden').val('true')
-    fieldset.hide()
+    tr = $(this).closest('tr')
+    tr.find('input.hidden').val('true')
+    tr.hide()
     event.preventDefault()
 
   $('form').on 'click', '.add_fields', (event) ->
     time = new Date().getTime()
     regexp = new RegExp($(this).data('id'), 'g')
-    $(this).before($(this).data('fields').replace(regexp, time))
+    $(this).closest('tr').before($(this).data('fields').replace(regexp, time))
+    $('select').select2()
     event.preventDefault()
