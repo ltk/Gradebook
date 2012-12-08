@@ -11,7 +11,7 @@
 #
 # It's strongly recommended to check this file into your version control system.
 
-ActiveRecord::Schema.define(:version => 20121206150013) do
+ActiveRecord::Schema.define(:version => 20121208150444) do
 
   create_table "courses", :force => true do |t|
     t.string   "name"
@@ -24,6 +24,8 @@ ActiveRecord::Schema.define(:version => 20121206150013) do
     t.integer  "semester_id"
   end
 
+  add_index "courses", ["semester_id"], :name => "index_courses_on_semester_id"
+
   create_table "enrollments", :force => true do |t|
     t.integer  "user_id"
     t.integer  "course_id"
@@ -32,6 +34,9 @@ ActiveRecord::Schema.define(:version => 20121206150013) do
     t.datetime "created_at",                                :null => false
     t.datetime "updated_at",                                :null => false
   end
+
+  add_index "enrollments", ["course_id"], :name => "index_enrollments_on_course_id"
+  add_index "enrollments", ["user_id"], :name => "index_enrollments_on_user_id"
 
   create_table "roles", :force => true do |t|
     t.string   "name"
@@ -60,6 +65,9 @@ ActiveRecord::Schema.define(:version => 20121206150013) do
     t.datetime "created_at",  :null => false
     t.datetime "updated_at",  :null => false
   end
+
+  add_index "teaching_assignments", ["course_id"], :name => "index_teaching_assignments_on_course_id"
+  add_index "teaching_assignments", ["teacher_id"], :name => "index_teaching_assignments_on_teacher_id"
 
   create_table "users", :force => true do |t|
     t.string   "email"

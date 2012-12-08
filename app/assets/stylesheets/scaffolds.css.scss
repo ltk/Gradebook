@@ -26,6 +26,9 @@ a {
   &:hover {
     color: lighten(blue, 10%);
   }
+  &.btn {
+    color: inherit;
+  }
 }
 
 div {
