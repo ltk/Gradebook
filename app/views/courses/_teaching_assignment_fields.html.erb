@@ -1,4 +1,4 @@
 <tr>
   <td><%= f.association :user, :label => false, :collection => Teacher.not_in( @course ) %></td>
-  <td><%= link_to "Cancel", '#', class: "remove_fields" %><%= f.input :_destroy, :as => :hidden %></td>
+  <td><%= link_to "Cancel", '#', class: "remove_fields btn btn-danger btn-small" %><%= f.input :_destroy, :as => :hidden %></td>
 </tr>

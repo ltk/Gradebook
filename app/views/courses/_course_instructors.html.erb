@@ -1,27 +1,33 @@
 <h2>Course Instructors</h2>
 <h4><%= pluralize(course.teaching_assignments.size, "Instructor") %></h4>
-<%= simple_form_for(course) do |f| %>
-  <%= f.error_notification %>
+<%= simple_form_for(course) do |t| %>
+  <%= t.error_notification %>
   <table class="table">
     <tr>
       <th>Instructor</th>
       <th></th>
     </tr>
-  <%= f.simple_fields_for :teaching_assignments do |e| %>
+  <%= t.simple_fields_for :teaching_assignments do |e| %>
     <% if e.object.user.nil? %>
       <%= render 'teaching_assignment_fields', :f => e %>
     <% else %>
       <tr>
-        <td><%= e.object.user.nil? ? 'New Teacher' : e.object.user.full_name %></td>
-        <td><%= link_to "Remove from Course", '#', class: "remove_fields" %><%= e.input :_destroy, :as => :hidden %></td>
+        <% if e.object.user.nil? %>
+          <td><%= e.association :user, :label => false, :collection => Teacher.not_in( @course ) %></td>
+        <% else %>
+          <td><%= e.object.user.full_name %></td>
+        <% end %>
+        
+        <td><%= link_to "Remove from Course", '#', class: "remove_fields btn btn-danger btn-small" %><%= e.input :_destroy, :as => :hidden %></td>
       </tr>
     <% end %>
     <hr/>
   <% end %>
 
-      <tr><td colspan='2'><%= link_to_add_fields "Add an Instructor to this Course", f, :teaching_assignments %></td></tr>
+      <tr><td colspan='2'><%= link_to_add_fields "Add an Instructor to this Course", t, :teaching_assignments %></td></tr>
     </table>
   <div class="form-actions">
-    <%= f.button :submit, "Save Changes" %>
+    <%= t.button :submit, "Save Changes", :class => "btn-info" %>
+    <%= link_to "Discard Changes", course, :class => 'btn' %>
   </div>
 <% end %>

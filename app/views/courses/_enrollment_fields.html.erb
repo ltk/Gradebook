@@ -1,5 +1,5 @@
 <tr>
   <td><%= f.association :user, :label => false, :collection => Student.not_in( @course ) %></td>
   <td><%= grade_selector(f, false) %></td>
-  <td><%= f.input :_destroy, :as => :hidden %><%= link_to "Cancel", '#', class: "remove_fields" %></td>
+  <td><%= f.input :_destroy, :as => :hidden %><%= link_to "Cancel", '#', class: "remove_fields btn btn-danger btn-small" %></td>
 </tr>
