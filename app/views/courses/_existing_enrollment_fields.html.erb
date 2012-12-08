@@ -1,0 +1,5 @@
+<tr>
+  <td><%= f.object.user.nil? ? 'New Student' : f.object.user.full_name %></td>
+  <td><%= grade_selector(f, false) %></td>
+  <td><%= link_to "Remove from Course", '#', class: "remove_fields btn btn-danger btn-small" %><%= f.input :_destroy, :as => :hidden %></td>
+</tr>

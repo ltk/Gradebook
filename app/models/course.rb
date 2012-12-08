@@ -18,7 +18,6 @@ class Course < ActiveRecord::Base
   validates_presence_of :description
 
   scope :for_semester, lambda { |semester| semester.nil? ? nil : where(:semester_id => semester.id) }
-
   self.per_page = 20
 
   def enrollment

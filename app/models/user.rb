@@ -28,13 +28,6 @@ class User < ActiveRecord::Base
     "User"
   end
 
-  def gpa(semester = nil)
-    self.enrolled_courses.for_semester(semester).average('grade')
-  end
-  # def gpa
-  #   self.enrollments.inject { |sum,enrollment| enrollment.grade }
-  # end
-
   def is_admin?
     false
   end
@@ -45,6 +38,33 @@ class User < ActiveRecord::Base
   
   def to_s
     self.full_name
+  end
+
+  def sort_memberships_by_semester(current_semester, course_memberships)
+    data = { :semesters => [], :course_memberships => { :current => {}, :future => {}, :past => {} } }
+    course_memberships.each do |course_membership|
+      data[:semesters] << course_membership.course.semester
+      if( course_membership.course.for_semester(current_semester) )
+        if data[:course_memberships][:current][current_semester]
+          data[:course_memberships][:current][current_semester] << course_membership
+        else
+          data[:course_memberships][:current][current_semester] = [course_membership]
+        end
+      elsif( course_membership.course.semester.start_date < current_semester.start_date )
+        if data[:course_memberships][:past][course_membership.course.semester]
+          data[:course_memberships][:past][course_membership.course.semester] << course_membership
+        else
+          data[:course_memberships][:past][course_membership.course.semester] = [course_membership]
+        end 
+      else
+        if data[:course_memberships][:future][course_membership.course.semester]
+          data[:course_memberships][:future][course_membership.course.semester] << course_membership
+        else
+          data[:course_memberships][:future][course_membership.course.semester] = [course_membership]
+        end 
+      end
+    end
+    data
   end
 
   def self.child_classes
