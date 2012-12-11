@@ -1,6 +1,6 @@
 source 'https://rubygems.org'
 gem 'rails', '3.2.9'
-gem 'pg'
+gem 'sqlite3'
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
   gem 'coffee-rails', '~> 3.2.1'
@@ -21,6 +21,5 @@ gem "rolify", ">= 3.2.0"
 gem "simple_form", ">= 2.0.4"
 gem "quiet_assets", ">= 1.0.1", :group => :development
 gem "shoulda", :group => :test
-gem "bullet", :group => :development
 gem "will_paginate", "~> 3.0"
 gem 'validates_email_format_of', :git => 'git://github.com/alexdunae/validates_email_format_of.git'
