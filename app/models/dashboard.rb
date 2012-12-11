@@ -4,8 +4,6 @@ class Dashboard
   def initialize(user, current_semester)
     
     case user.type
-    when 'Administrator'
-
     when 'Teacher'
       initialize_data_for_teacher(user, current_semester)
     when 'Student'

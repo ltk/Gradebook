@@ -24,141 +24,147 @@ describe CoursesController do
   # Course. As you add validations to Course, be sure to
   # update the return value of this method accordingly.
   def valid_attributes
-    { "name" => "MyString" }
+    { "name" => "MyString", "code" => "Bio101", "description" => "The intro bio class.", "semester_id" => FactoryGirl.create(:semester).id }
   end
 
   # This should return the minimal set of values that should be in the session
   # in order to pass any filters (e.g. authentication) defined in
   # CoursesController. Be sure to keep this updated too.
   def valid_session
-    {}
+    { :user_id => logged_in_user.id }
   end
 
-  describe "GET index" do
-    it "assigns all courses as @courses" do
-      course = Course.create! valid_attributes
-      get :index, {}, valid_session
-      assigns(:courses).should eq([course])
+  context "when logged in as an admin" do
+    let(:logged_in_user) { FactoryGirl.create(:admin) }
+    before(:each) do
+      User.authenticate( logged_in_user.email, logged_in_user.password)
     end
-  end
 
-  describe "GET show" do
-    it "assigns the requested course as @course" do
-      course = Course.create! valid_attributes
-      get :show, {:id => course.to_param}, valid_session
-      assigns(:course).should eq(course)
-    end
-  end
-
-  describe "GET new" do
-    it "assigns a new course as @course" do
-      get :new, {}, valid_session
-      assigns(:course).should be_a_new(Course)
-    end
-  end
-
-  describe "GET edit" do
-    it "assigns the requested course as @course" do
-      course = Course.create! valid_attributes
-      get :edit, {:id => course.to_param}, valid_session
-      assigns(:course).should eq(course)
-    end
-  end
-
-  describe "POST create" do
-    describe "with valid params" do
-      it "creates a new Course" do
-        expect {
-          post :create, {:course => valid_attributes}, valid_session
-        }.to change(Course, :count).by(1)
-      end
-
-      it "assigns a newly created course as @course" do
-        post :create, {:course => valid_attributes}, valid_session
-        assigns(:course).should be_a(Course)
-        assigns(:course).should be_persisted
-      end
-
-      it "redirects to the created course" do
-        post :create, {:course => valid_attributes}, valid_session
-        response.should redirect_to(Course.last)
+    describe "GET index" do
+      it "assigns all courses as @courses" do
+        course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+        get :index, {}, valid_session
+        assigns(:courses).should eq([course])
       end
     end
 
-    describe "with invalid params" do
-      it "assigns a newly created but unsaved course as @course" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Course.any_instance.stub(:save).and_return(false)
-        post :create, {:course => { "name" => "invalid value" }}, valid_session
+    describe "GET show" do
+      it "assigns the requested course as @course" do
+        course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+        get :show, {:id => course.to_param}, valid_session
+        assigns(:course).should eq(course)
+      end
+    end
+
+    describe "GET new" do
+      it "assigns a new course as @course" do
+        get :new, {}, valid_session
         assigns(:course).should be_a_new(Course)
       end
-
-      it "re-renders the 'new' template" do
-        # Trigger the behavior that occurs when invalid params are submitted
-        Course.any_instance.stub(:save).and_return(false)
-        post :create, {:course => { "name" => "invalid value" }}, valid_session
-        response.should render_template("new")
-      end
     end
-  end
 
-  describe "PUT update" do
-    describe "with valid params" do
-      it "updates the requested course" do
-        course = Course.create! valid_attributes
-        # Assuming there are no other courses in the database, this
-        # specifies that the Course created on the previous line
-        # receives the :update_attributes message with whatever params are
-        # submitted in the request.
-        Course.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
-        put :update, {:id => course.to_param, :course => { "name" => "MyString" }}, valid_session
-      end
-
+    describe "GET edit" do
       it "assigns the requested course as @course" do
-        course = Course.create! valid_attributes
-        put :update, {:id => course.to_param, :course => valid_attributes}, valid_session
+        course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+        get :edit, {:id => course.to_param}, valid_session
         assigns(:course).should eq(course)
-      end
-
-      it "redirects to the course" do
-        course = Course.create! valid_attributes
-        put :update, {:id => course.to_param, :course => valid_attributes}, valid_session
-        response.should redirect_to(course)
       end
     end
 
-    describe "with invalid params" do
-      it "assigns the course as @course" do
-        course = Course.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Course.any_instance.stub(:save).and_return(false)
-        put :update, {:id => course.to_param, :course => { "name" => "invalid value" }}, valid_session
-        assigns(:course).should eq(course)
+    describe "POST create" do
+      describe "with valid params" do
+        it "creates a new Course" do
+          expect {
+            post :create, {:course => valid_attributes}, valid_session
+          }.to change(Course, :count).by(1)
+        end
+
+        it "assigns a newly created course as @course" do
+          post :create, {:course => valid_attributes}, valid_session
+          assigns(:course).should be_a(Course)
+          assigns(:course).should be_persisted
+        end
+
+        it "redirects to the created course" do
+          post :create, {:course => valid_attributes}, valid_session
+          response.should redirect_to(Course.last)
+        end
       end
 
-      it "re-renders the 'edit' template" do
-        course = Course.create! valid_attributes
-        # Trigger the behavior that occurs when invalid params are submitted
-        Course.any_instance.stub(:save).and_return(false)
-        put :update, {:id => course.to_param, :course => { "name" => "invalid value" }}, valid_session
-        response.should render_template("edit")
+      describe "with invalid params" do
+        it "assigns a newly created but unsaved course as @course" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Course.any_instance.stub(:save).and_return(false)
+          post :create, {:course => { "name" => "invalid value" }}, valid_session
+          assigns(:course).should be_a_new(Course)
+        end
+
+        it "re-renders the 'new' template" do
+          # Trigger the behavior that occurs when invalid params are submitted
+          Course.any_instance.stub(:save).and_return(false)
+          post :create, {:course => { "name" => "invalid value" }}, valid_session
+          response.should render_template("new")
+        end
       end
     end
-  end
 
-  describe "DELETE destroy" do
-    it "destroys the requested course" do
-      course = Course.create! valid_attributes
-      expect {
+    describe "PUT update" do
+      describe "with valid params" do
+        it "updates the requested course" do
+          course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+          # Assuming there are no other courses in the database, this
+          # specifies that the Course created on the previous line
+          # receives the :update_attributes message with whatever params are
+          # submitted in the request.
+          Course.any_instance.should_receive(:update_attributes).with({ "name" => "MyString" })
+          put :update, {:id => course.to_param, :course => { "name" => "MyString" }}, valid_session
+        end
+
+        it "assigns the requested course as @course" do
+          course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+          put :update, {:id => course.to_param, :course => valid_attributes}, valid_session
+          assigns(:course).should eq(course)
+        end
+
+        it "redirects to the course" do
+          course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+          put :update, {:id => course.to_param, :course => valid_attributes}, valid_session
+          response.should redirect_to(course)
+        end
+      end
+
+      describe "with invalid params" do
+        it "assigns the course as @course" do
+          course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+          # Trigger the behavior that occurs when invalid params are submitted
+          Course.any_instance.stub(:save).and_return(false)
+          put :update, {:id => course.to_param, :course => { "name" => "" }}, valid_session
+          assigns(:course).should eq(course)
+        end
+
+        it "re-renders the 'edit' template" do
+          course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+          # Trigger the behavior that occurs when invalid params are submitted
+          Course.any_instance.stub(:save).and_return(false)
+          put :update, {:id => course.to_param, :course => { "name" => "" }}, valid_session
+          response.should render_template("edit")
+        end
+      end
+    end
+
+    describe "DELETE destroy" do
+      it "destroys the requested course" do
+        course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
+        expect {
+          delete :destroy, {:id => course.to_param}, valid_session
+        }.to change(Course, :count).by(-1)
+      end
+
+      it "redirects to the courses list" do
+        course = FactoryGirl.create(:course, :semester => FactoryGirl.create(:semester))
         delete :destroy, {:id => course.to_param}, valid_session
-      }.to change(Course, :count).by(-1)
-    end
-
-    it "redirects to the courses list" do
-      course = Course.create! valid_attributes
-      delete :destroy, {:id => course.to_param}, valid_session
-      response.should redirect_to(courses_url)
+        response.should redirect_to(courses_url)
+      end
     end
   end
-
 end

@@ -3,8 +3,8 @@
 FactoryGirl.define do
   factory :semester do
     courses_count 1
-    start_date "2012-12-06"
-    end_date "2012-12-06"
+    start_date "2012-12-01"
+    end_date "2012-12-10"
     name "MyString"
   end
 end

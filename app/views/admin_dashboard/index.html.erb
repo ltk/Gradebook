@@ -1,6 +1,6 @@
 <h1>Admin Panel</h1>
 
-<h2>Current Courses: <%= @current_semester.name %></h2>
+<h2>Current Courses: <%= @current_semester.name if @current_semester %></h2>
 <%= render 'courses', :courses => @data[:courses], :show_semester_info => false %>
 
 <%= link_to "View Other Semesters", semesters_path %>

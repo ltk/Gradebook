@@ -1,5 +1,5 @@
 class UsersController < ApplicationController
-  load_and_authorize_resource  
+  load_and_authorize_resource :except => [:create]
   # GET /users
   # GET /users.json
   def index
@@ -37,9 +37,9 @@ class UsersController < ApplicationController
   # POST /users.json
   def create
     type = params[:user][:type]
-    params[:user].tap { |hs| hs.delete(:type) }
+    params[:user].delete :type
     @user = User.new(params[:user])
-    @user.update_attribute(:type, type)
+    @user.type = type
 
     respond_to do |format|
       if @user.save

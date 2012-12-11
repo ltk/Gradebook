@@ -23,4 +23,12 @@ FactoryGirl.define do
     password "correct horse battery staple"
     password_confirmation "correct horse battery staple"
   end
+
+  factory :teacher, :class => Teacher do
+    first_name "Foo"
+    last_name "Bar"
+    email "nonadmin@example.com"
+    password "correct horse battery staple"
+    password_confirmation "correct horse battery staple"
+  end
 end
