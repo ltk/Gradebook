@@ -28,25 +28,38 @@ describe Course do
 
   describe "#enrollment" do
     it "should return the first enrollment" do
-      pending
-      user = FactoryGirl.create(:user)
-      user.full_name.should == user.first_name + ' ' + user.last_name
+      student = FactoryGirl.create(:non_admin)
+      semester = FactoryGirl.create(:semester)
+      course = FactoryGirl.create(:course, :semester => semester)
+      enrollment = Enrollment.create(:user_id => student.id, :course_id => course.id )
+      course.enrollment.should be(course.enrollments.first)
     end
   end
 
   describe "#for_semester" do
-    it "should return it's semester's id" do
-      pending
-      admin = FactoryGirl.create(:admin)
-      admin.is_admin?.should be_true
+    it "should return true if it belongs to the passed semester" do
+      semester = FactoryGirl.create(:semester)
+      course = FactoryGirl.create(:course, :semester => semester)
+      course.for_semester(semester).should be_true
+    end
+
+    it "should return false if it does not belong to the passed semester" do
+      semester1 = FactoryGirl.create(:semester, :name => "Semester 1")
+      semester2 = FactoryGirl.create(:semester, :name => "Semester 2")
+      course = FactoryGirl.create(:course, :semester => semester1)
+      course.for_semester(semester2).should be_false
     end
   end
 
   describe "#average_gradepoint" do
     it "should the average grade of all enrolled students" do
-      pending
       student1 = FactoryGirl.create(:non_admin)
-      user.to_s.should == user.full_name
+      student2 = FactoryGirl.create(:non_admin, :email => 'student2@gradebook.com')
+      semester = FactoryGirl.create(:semester)
+      course = FactoryGirl.create(:course, :semester => semester)
+      enrollment1 = Enrollment.create(:user_id => student1.id, :course_id => course.id, :grade => 3.0 )
+      enrollment2 = Enrollment.create(:user_id => student2.id, :course_id => course.id, :grade => 4.0 )
+      course.average_gradepoint.should eq(3.5)
     end
   end
 end
